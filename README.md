@@ -212,3 +212,7 @@ scripts/     runnable entry points (fine-tune, real interp, synthetic + TF demos
 tests/       pytest suite that passes fully offline
 results/     checkpoints, figures, cached arrays (gitignored)
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE).
