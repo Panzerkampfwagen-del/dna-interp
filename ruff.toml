@@ -1,0 +1,10 @@
+line-length = 120
+target-version = "py311"
+extend-exclude = ["notebooks"]
+
+[lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+# Style choices, not bugs: line length is left to judgement; `l` is used for
+# layer/label indices throughout; `mk = lambda ...` are deliberate local helpers;
+# zip(strict=) is noise for equal-length numpy arrays.
+ignore = ["E501", "E741", "E731", "B905"]
