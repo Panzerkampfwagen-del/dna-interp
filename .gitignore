@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Generated artifacts (checkpoints, figures, cached arrays)
+results/
+*.pt
+*.npz
+*.npy
+
+# Downloaded assets (DNABERT-2, JASPAR, datasets) — fetched at runtime
+data/raw/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

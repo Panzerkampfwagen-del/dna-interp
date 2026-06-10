@@ -1,0 +1,19 @@
+# Core
+torch>=2.2
+transformers>=4.40
+numpy>=1.24
+
+# Real mode: DNABERT-2 weights + Nucleotide Transformer enhancer dataset
+# (both downloaded at runtime; see scripts/download_assets.py)
+datasets>=2.18
+einops>=0.7          # required by the DNABERT-2 remote code
+
+# Optional: figures render to PNG when present, otherwise .npz arrays are saved
+matplotlib>=3.7
+
+# Tests
+pytest>=7.4
+
+# Metrics and probes are implemented from scratch in numpy (no scikit-learn/scipy).
+# The original BEND benchmark is unavailable upstream; the enhancer task uses the
+# Nucleotide Transformer downstream dataset as an accessible same-task substitute.
