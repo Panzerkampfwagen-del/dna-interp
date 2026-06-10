@@ -1,5 +1,7 @@
 # dna-interp
 
+[![tests](https://github.com/Panzerkampfwagen-del/dna-interp/actions/workflows/ci.yml/badge.svg)](https://github.com/Panzerkampfwagen-del/dna-interp/actions/workflows/ci.yml)
+
 Mechanistic interpretability of a DNA language model (DNABERT-2) on the enhancer
 classification task. The goal is not benchmark accuracy but understanding what
 the model learns: attention-head specialization, causal activation patching,
