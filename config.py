@@ -6,7 +6,6 @@ import fixes seeds and resolves where results are written.
 
 from __future__ import annotations
 
-import os
 import random
 from pathlib import Path
 

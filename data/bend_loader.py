@@ -11,9 +11,9 @@ that the dataset, model wrapper, and interp code all accept unchanged.
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 from itertools import product
-from typing import Iterable, Sequence
 
 import numpy as np
 import torch

@@ -1,9 +1,9 @@
 import torch
 
 from data.bend_loader import (
+    PLANT_MOTIFS,
     BendDataset,
     KmerTokenizer,
-    PLANT_MOTIFS,
     collate,
     make_synthetic_enhancer_dataset,
 )

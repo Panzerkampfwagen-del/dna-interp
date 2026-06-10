@@ -38,12 +38,13 @@ def test_tf_binding_metrics_extremes():
 
 
 def test_tf_binding_training_plumbing():
-    from config import get_device, set_seed
-    from finetune.trainer import TrainConfig, train
-    from finetune.evaluate import evaluate
-    from data.bend_loader import KmerTokenizer, train_val_test_split
-    from models.dna_lm import build_tiny_classifier
     from torch.utils.data import Subset
+
+    from config import get_device, set_seed
+    from data.bend_loader import KmerTokenizer, train_val_test_split
+    from finetune.evaluate import evaluate
+    from finetune.trainer import TrainConfig, train
+    from models.dna_lm import build_tiny_classifier
 
     set_seed(0)
     device = get_device()

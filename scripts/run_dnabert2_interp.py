@@ -19,18 +19,17 @@ import sys
 from pathlib import Path
 
 import numpy as np
-import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from config import CACHE, RAW, get_device, set_seed  # noqa: E402
 from data.bend_loader import load_dnabert2_tokenizer, load_nt_enhancer, make_synthetic_enhancer_dataset  # noqa: E402
 from data.jaspar import Motif, builtin_motifs, parse_jaspar  # noqa: E402
+from finetune.trainer import load_checkpoint  # noqa: E402
 from interp.attention import analyze_heads, most_specialized_heads  # noqa: E402
 from interp.motif_scan import head_attention_received, motif_head_correlations  # noqa: E402
 from interp.probing import build_property_labels, probe_all_layers  # noqa: E402
 from models.dna_lm import load_dnabert2_classifier  # noqa: E402
-from finetune.trainer import load_checkpoint  # noqa: E402
 from visualize.plot_attention import plot_head_maps  # noqa: E402
 from visualize.plot_motifs import plot_motif_noisefloor  # noqa: E402
 from visualize.plot_probing import plot_probe_accuracy  # noqa: E402

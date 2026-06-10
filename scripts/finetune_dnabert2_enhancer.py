@@ -18,14 +18,18 @@ import json
 import sys
 from pathlib import Path
 
-import numpy as np
 from torch.utils.data import DataLoader, Subset
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from config import CACHE, CHECKPOINTS, get_device, set_seed  # noqa: E402
-from data.bend_loader import BendDataset, collate, load_nt_enhancer, train_val_test_split  # noqa: E402
-from data.bend_loader import load_dnabert2_tokenizer  # noqa: E402
+from data.bend_loader import (  # noqa: E402
+    BendDataset,
+    collate,
+    load_dnabert2_tokenizer,  # noqa: E402
+    load_nt_enhancer,
+    train_val_test_split,
+)
 from finetune.evaluate import evaluate  # noqa: E402
 from finetune.trainer import TrainConfig, load_checkpoint, train  # noqa: E402
 from models.dna_lm import load_dnabert2_classifier  # noqa: E402

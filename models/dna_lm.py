@@ -14,8 +14,6 @@ a small local BERT in offline tests, with no code change.
 
 from __future__ import annotations
 
-from typing import Optional
-
 import torch
 import torch.nn as nn
 
@@ -70,7 +68,7 @@ class DNAClassifier(nn.Module):
         # they need a dedicated cache path instead of output_hidden_states.
         self._remote = "transformers_modules" in type(self.base).__module__
 
-    def enable_efficiency(self, bf16: bool = True) -> "DNAClassifier":
+    def enable_efficiency(self, bf16: bool = True) -> DNAClassifier:
         """Gradient checkpointing plus BF16 to fit DNABERT-2 in 4 GB VRAM.
 
         The whole module is cast (not just the backbone) so the classification
@@ -105,10 +103,10 @@ class DNAClassifier(nn.Module):
         self,
         input_ids: torch.Tensor,
         attention_mask: torch.Tensor,
-        position_ids: Optional[torch.Tensor] = None,
-        patch: Optional[dict] = None,
-        cache_activations: Optional[bool] = None,
-    ) -> tuple[torch.Tensor, Optional[dict]]:
+        position_ids: torch.Tensor | None = None,
+        patch: dict | None = None,
+        cache_activations: bool | None = None,
+    ) -> tuple[torch.Tensor, dict | None]:
         """Run the model. `patch` is {layer:int, position:int, value:tensor[H]}
         and replaces the residual stream leaving encoder layer `layer`.
 

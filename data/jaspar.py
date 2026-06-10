@@ -35,7 +35,7 @@ class Motif:
     def consensus(self) -> str:
         return "".join("ACGT"[i] for i in self.probs.argmax(axis=0))
 
-    def reverse_complement(self) -> "Motif":
+    def reverse_complement(self) -> Motif:
         # reverse columns and swap A<->T, C<->G (row order A,C,G,T -> T,G,C,A)
         rc = self.probs[::-1, ::-1].copy()
         return Motif(self.name + "_rc", rc)

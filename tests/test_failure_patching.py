@@ -21,10 +21,11 @@ def test_self_patch_returns_zero(model, tokenizer, synthetic, max_length):
 def test_directional_patch_recovers_signal(tokenizer):
     """A trained model: patching an enhancer donor into a non-enhancer raises the
     enhancer logit somewhere (the planted signal is causally transferable)."""
+    from torch.utils.data import DataLoader, Subset
+
+    from data.bend_loader import BendDataset, collate, train_val_test_split
     from finetune.trainer import TrainConfig, train
     from models.dna_lm import build_tiny_classifier
-    from data.bend_loader import BendDataset, collate, train_val_test_split
-    from torch.utils.data import DataLoader, Subset
 
     ds = make_synthetic_enhancer_dataset(n=800, length=90, seed=0)
     data = BendDataset(ds.sequences, ds.labels, tokenizer, max_length=36)

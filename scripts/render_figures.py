@@ -17,9 +17,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from config import FIGURES  # noqa: E402
-
 import matplotlib  # noqa: E402
+
+from config import FIGURES  # noqa: E402
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402

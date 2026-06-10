@@ -28,7 +28,7 @@ def plot_top_motifs(
     from config import FIGURES
 
     fig, ax = plt.subplots(figsize=(10, 4))
-    for i, (hd, row) in enumerate(zip(labels, rows)):
+    for i, row in enumerate(rows):
         names = [n for n, _ in row]
         vals = [c for _, c in row]
         x = np.arange(len(vals)) + i * (len(vals) + 1)

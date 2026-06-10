@@ -14,7 +14,6 @@ import json
 import sys
 from pathlib import Path
 
-import numpy as np
 from torch.utils.data import DataLoader, Subset
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -27,7 +26,6 @@ from data.bend_loader import (  # noqa: E402
     make_synthetic_tf_binding_dataset,
     train_val_test_split,
 )
-from data.jaspar import builtin_motifs  # noqa: E402
 from finetune.evaluate import evaluate  # noqa: E402
 from finetune.trainer import TrainConfig, train  # noqa: E402
 from interp.patching import averaged_patch_experiment, top_causal_sites  # noqa: E402
@@ -62,7 +60,6 @@ def main() -> None:
     print(f"TEST: {evaluate(model, mk(te, 64, False), device, 'tf_binding')}")
 
     section("Stage 2: per-TF activation patching localizes to that TF's motif")
-    motifs = {m.name: m for m in builtin_motifs()}
     layers = list(range(model.n_layers))
     report: dict = {}
     for t, name in enumerate(ds.tf_names):
