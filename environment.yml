@@ -1,0 +1,20 @@
+name: dna-interp
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    # PyTorch — swap the index-url for a CUDA build on GPU machines:
+    #   https://download.pytorch.org/whl/cu121
+    - torch>=2.2
+    - transformers>=4.40,<5
+    - numpy>=1.24
+    - datasets>=2.18
+    - einops>=0.7
+    - matplotlib>=3.7
+    - pytest>=7.4
+    # tokenizers is a transitive dep of transformers; pinned here for
+    # reproducibility on the versions verified to pass CI.
+    - tokenizers>=0.15

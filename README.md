@@ -110,25 +110,43 @@ consistent):
   missing motif detector. Outputs in `results/test_failure_patching/`
   (`delta_specific_heatmap.png` is the key figure).
 
+## Setup
+
+One-step environment creation (requires [conda](https://docs.conda.io)):
+
+```bash
+conda env create -f environment.yml   # creates the 'dna-interp' env
+conda activate dna-interp
+```
+
+For GPU training swap the `torch` index URL in `environment.yml` to the matching
+CUDA build (e.g. `https://download.pytorch.org/whl/cu124` for CUDA 12.4).
+
+Common tasks via `make`:
+
+```bash
+make test             # run the full test suite (CPU, fully offline)
+make demo-synthetic   # end-to-end synthetic pipeline (no network needed)
+make demo-tf          # TF-binding multi-label demo
+make finetune         # fine-tune real DNABERT-2 (needs GPU + network)
+make interp CKPT=results/checkpoints/dnabert2_enhancer_best.pt
+make patch-failures CKPT=results/checkpoints/dnabert2_enhancer_best.pt
+```
+
 ## Environment
 
-Runs (training, demo, interp) use the GPU env (torch + CUDA + transformers):
+A single `dna-interp` conda environment (Python 3.11, `environment.yml`) covers
+tests, synthetic demos, and real-model runs. No scikit-learn / scipy dependency:
+metrics and probes are implemented in numpy/torch from scratch (`metrics.py`,
+`models/probes.py`). matplotlib is an optional import in `visualize/` — when
+absent only `.npz` arrays are written; render them later with
+`scripts/render_figures.py`.
 
-```
-/home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python
-```
+Tests run fully offline (39 tests, CPU, untrained tiny BERT):
 
-Tests use the `tinyinfer` env, which is the one with `pytest`:
-
+```bash
+pytest -q   # or: make test
 ```
-/home/aryan/anaconda3/envs/tinyinfer/bin/python -m pytest -q   # 35 tests, fully offline
-```
-
-Neither env has scikit-learn / scipy, so metrics and probes are implemented in
-numpy/torch from scratch (`metrics.py`, `models/probes.py`). matplotlib is an
-optional import in `visualize/`: the GPU env has it (so PNGs render alongside the
-`.npz`), and when it is absent only the `.npz` arrays are written. Figures saved
-without it can be turned into PNGs later with `scripts/render_figures.py`.
 
 ## Two modes
 
@@ -147,8 +165,8 @@ validated without network access.
    attention, patching, probing, and motif-scan code then confirms the tools
    recover the planted signal — this is what validates the machinery itself.
 
-   ```
-   /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python scripts/run_synthetic_demo.py
+   ```bash
+   make demo-synthetic   # or: python scripts/run_synthetic_demo.py
    ```
 
 ### Synthetic validation (tooling check, not a benchmark claim)
