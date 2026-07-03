@@ -102,7 +102,7 @@ def main(checkpoint: str | None = None) -> None:
     stats = analyze_heads(clf, seqs, labs, tok, device, max_length=max_length, n_seqs=150)
     specialized = most_specialized_heads(stats, top_k=5)
     n_low = int((stats.mean_entropy < 0.8).sum())
-    print(f"  entropy range [{stats.mean_entropy.min():.3f}, {stats.mean_entropy.max():.3f}]; {n_low}/144 heads specialized (<0.8)")
+    print(f"  entropy range [{stats.mean_entropy.min():.3f}, {stats.mean_entropy.max():.3f}]; {n_low}/{stats.n_layers * stats.n_heads} heads specialized (<0.8)")
     print(f"  5 most specialized (layer, head, entropy): {[(l, h, round(e, 3)) for l, h, e in specialized]}")
     plot_head_maps(stats, stem="dnabert2_attention_heads")
 

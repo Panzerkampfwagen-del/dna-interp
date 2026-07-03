@@ -119,12 +119,17 @@ def extract_layer_activations(
 
 def _probe_layer(X: np.ndarray, y: np.ndarray, kind: str, split: float) -> float:
     n_test = int(len(y) * split)
-    Xtr, Xte = X[:-n_test], X[-n_test:]
+    if n_test == 0:
+        # -0 == 0 in Python, so X[:-0] would be X[:0] (empty). Guard so train
+        # keeps the full array and test is a valid empty slice for both X and y.
+        Xtr, Xte, ytr, yte = X, X[0:0], y, y[0:0]
+    else:
+        Xtr, Xte, ytr, yte = X[:-n_test], X[-n_test:], y[:-n_test], y[-n_test:]
     if kind == "regression":
-        return regression_probe(Xtr, y[:-n_test], Xte, y[-n_test:])["r2"]
+        return regression_probe(Xtr, ytr, Xte, yte)["r2"]
     if kind == "multilabel":
-        return multilabel_probe(Xtr, y[:-n_test], Xte, y[-n_test:])["accuracy"]
-    return classification_probe(Xtr, y[:-n_test], Xte, y[-n_test:])["accuracy"]
+        return multilabel_probe(Xtr, ytr, Xte, yte)["accuracy"]
+    return classification_probe(Xtr, ytr, Xte, yte)["accuracy"]
 
 
 def _infer_kind(name: str, y: np.ndarray) -> str:
