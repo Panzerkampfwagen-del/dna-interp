@@ -18,6 +18,3 @@ data/raw/
 
 # OS
 .DS_Store
-
-# Local planning notes
-*_prompt.md
