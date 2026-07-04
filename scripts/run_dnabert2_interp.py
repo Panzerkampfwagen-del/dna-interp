@@ -98,7 +98,7 @@ def main(checkpoint: str | None = None) -> None:
         print(f"  {name:5s} ({metric}): best={max(per_layer):.3f} @ L{int(np.argmax(per_layer))}  curve={[round(x, 2) for x in per_layer]}")
     plot_probe_accuracy(probe, stem="dnabert2_probing")
 
-    section("Attention head specialization (144 heads)")
+    section(f"Attention head specialization ({clf.n_layers * clf.n_heads} heads)")
     stats = analyze_heads(clf, seqs, labs, tok, device, max_length=max_length, n_seqs=150)
     specialized = most_specialized_heads(stats, top_k=5)
     n_low = int((stats.mean_entropy < 0.8).sum())
