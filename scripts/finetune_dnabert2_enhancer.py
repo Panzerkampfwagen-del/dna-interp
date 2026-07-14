@@ -8,8 +8,7 @@ fp32 weights with BF16 autocast (more stable than casting weights to BF16); 200 
 is ~42 BPE tokens so max_length=48 keeps it within ~3 GB. Saves the best
 checkpoint to results/checkpoints/dnabert2_enhancer_best.pt for the interp run.
 
-    PY=/home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python
-    $PY scripts/finetune_dnabert2_enhancer.py
+    python scripts/finetune_dnabert2_enhancer.py
 """
 
 from __future__ import annotations

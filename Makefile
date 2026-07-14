@@ -2,7 +2,8 @@
 # Override PY to point at a different interpreter, e.g.:
 #   make test PY=/home/aryan/anaconda3/envs/dna-interp/bin/python
 PY ?= /home/aryan/anaconda3/envs/dna-interp/bin/python
-GPU_PY ?= /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python
+# The single dna-interp env covers real-model runs too; override for a GPU build.
+GPU_PY ?= $(PY)
 
 # ── environment ────────────────────────────────────────────────────────────────
 

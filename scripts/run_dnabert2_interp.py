@@ -2,14 +2,16 @@
 
 Loads DNABERT-2 (patched to use eager attention so it runs without Triton and
 exposes attention weights), then probes its residual stream and analyzes its 144
-attention heads. By default it analyzes the pretrained backbone on synthetic
-sequences with planted motifs; pass a fine-tuned checkpoint and real BEND data
-for the full study.
+attention heads.
+
+By default it analyzes the real NT enhancer sequences, falling back to synthetic
+planted-motif sequences when that dataset is unavailable. Without a checkpoint the
+pretrained backbone is analyzed; pass a fine-tuned checkpoint for the full study.
 
 Activation patching is not run here: DNABERT-2's unpadded internals need position
 remapping (the synthetic BERT validates the patching logic itself).
 
-    /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python scripts/run_dnabert2_interp.py
+    python scripts/run_dnabert2_interp.py [checkpoint]
 """
 
 from __future__ import annotations

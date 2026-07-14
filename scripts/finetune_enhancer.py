@@ -5,7 +5,7 @@ schedule, BF16 autocast, gradient checkpointing for 4 GB VRAM, early stopping on
 validation MCC. Falls back to the synthetic dataset with a clear message if the
 real assets are not available, so the same path is exercisable offline.
 
-    /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python scripts/finetune_enhancer.py
+    python scripts/finetune_enhancer.py
 """
 
 from __future__ import annotations

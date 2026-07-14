@@ -6,7 +6,7 @@ a small local BERT on it, then runs the full analysis stack via
 signal. This is the offline evidence that the code is correct before pointing it
 at DNABERT-2 and real BEND data.
 
-    /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python scripts/run_synthetic_demo.py
+    python scripts/run_synthetic_demo.py
 """
 
 from __future__ import annotations

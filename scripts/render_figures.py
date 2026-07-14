@@ -5,7 +5,7 @@ matplotlib is importable. This script reads the saved .npz back and reproduces
 each figure (same drawing logic as visualize/), so figures from earlier
 matplotlib-less runs can be turned into images after `pip install matplotlib`.
 
-    /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python scripts/render_figures.py
+    python scripts/render_figures.py
 """
 
 from __future__ import annotations

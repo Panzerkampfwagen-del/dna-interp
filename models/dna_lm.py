@@ -172,9 +172,9 @@ class DNAClassifier(nn.Module):
 
         if patch is not None:
             raise NotImplementedError(
-                "activation patching on DNABERT-2 is not yet supported (unpadded "
-                "internal representations need position remapping); attention and "
-                "probing work, and the synthetic BERT validates the patching logic."
+                "the forward(patch=...) dict path is not wired for DNABERT-2's "
+                "unpadded internals; use interp.test_failure_patching, which remaps "
+                "padded positions to packed tokens via each layer's `indices`."
             )
 
         with ExitStack() as stack:

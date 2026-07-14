@@ -1,7 +1,7 @@
 """Download the real-mode assets: DNABERT-2 weights/tokenizer and JASPAR PWMs.
 
 Needs network. Run once; afterwards the pipeline works from the local cache.
-    /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python scripts/download_assets.py
+    python scripts/download_assets.py
 """
 
 from __future__ import annotations

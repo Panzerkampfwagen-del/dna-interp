@@ -5,7 +5,7 @@ motifs, then for each TF runs activation patching targeting that TF's logit and
 checks that the causal token positions land on that TF's planted motif. This is
 the Task-2 analogue of run_synthetic_demo.py and reuses interp.pipeline.
 
-    /home/aryan/anaconda3/envs/tinyinfer-gpu/bin/python scripts/run_tf_demo.py
+    python scripts/run_tf_demo.py
 """
 
 from __future__ import annotations
