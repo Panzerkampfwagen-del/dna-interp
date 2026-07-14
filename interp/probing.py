@@ -72,21 +72,31 @@ def build_property_labels(
     enhancer_labels: np.ndarray,
     tata_window: int = 50,
     n_kmers: int = 16,
+    test_split: float = 0.2,
 ) -> dict[str, np.ndarray]:
     """Compute probe targets for GC, CpG richness, centered TATA, and top k-mers.
 
     CpG and k-mer presence are thresholded at the median so the binary targets are
-    not degenerate.
+    not degenerate. The CpG/k-mer median thresholds and the discriminative-k-mer
+    selection are fit on the TRAIN slice only -- the leading ``1 - test_split`` of
+    the sequences, which is the exact train half of the tail split used by
+    ``probe_all_layers`` -- and then applied to all sequences. Fitting these label
+    statistics on the full set would leak the held-out probe targets into their own
+    thresholds and mildly inflate probe accuracy.
     """
+    n = len(sequences)
+    n_test = int(n * test_split)
+    n_train = n - n_test  # tail split: test is the last n_test rows (see _probe_layer)
+
     gc = np.array([gc_content(s) for s in sequences], dtype=np.float32)
     cpg = np.array([cpg_count(s) for s in sequences], dtype=np.float32)
-    cpg_bin = (cpg > np.median(cpg)).astype(np.int64)
+    cpg_bin = (cpg > np.median(cpg[:n_train])).astype(np.int64)
     tata = np.array([has_tata_center(s, tata_window) for s in sequences], dtype=np.int64)
 
     freq, _ = kmer_frequency_matrix(sequences, k=6)
-    idx = top_discriminative_kmers(freq, np.asarray(enhancer_labels), top=n_kmers)
+    idx = top_discriminative_kmers(freq[:n_train], np.asarray(enhancer_labels)[:n_train], top=n_kmers)
     kmer_freq = freq[:, idx]
-    kmer_bin = (kmer_freq > np.median(kmer_freq, axis=0, keepdims=True)).astype(np.int64)
+    kmer_bin = (kmer_freq > np.median(kmer_freq[:n_train], axis=0, keepdims=True)).astype(np.int64)
 
     return {"gc": gc, "cpg": cpg_bin, "tata": tata, "kmer": kmer_bin}
 
