@@ -57,13 +57,10 @@ Interpretability of the fine-tuned checkpoint (`scripts/run_dnabert2_interp.py
 - **Probing** — every discriminative feature is linearly decodable from the
   *earliest* layers and does not deepen: GC R²=0.99 @ L0, CpG 0.95 @ L1, TATA
   0.97 @ L3, k-mer 0.87 @ L2. The signal is sequence composition.
-  *(These four accuracies were produced before a probe-label leakage fix in
-  `interp/probing.py`: the CpG/k-mer median thresholds and discriminative-k-mer
-  selection are now fit on the probe train slice only, not the full probe set. On
-  the synthetic harness the fix shifts the affected probe accuracies by ≤0.004, so
-  the change here is expected to be small, but these exact real-model numbers still
-  need a refresh on a GPU host with the DNABERT-2 checkpoint — pending that rerun
-  they are the pre-fix values.)*
+  *(These are the leakage-fixed real-model values: the CpG/k-mer median thresholds
+  and discriminative-k-mer selection are fit on the probe train slice only, not the
+  full probe set. Regenerated on the DNABERT-2 checkpoint with that fix in place —
+  every accuracy moved by ≤0.004, i.e. unchanged at this precision.)*
 - **Attention** — 106/144 heads specialized (entropy < 0.8). The pretrained
   backbone control on the same sequences gives 123/144, so fine-tuning does not
   create specialized heads; DNABERT-2 is already sharp.
